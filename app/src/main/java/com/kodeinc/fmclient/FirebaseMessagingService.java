@@ -1,6 +1,7 @@
 package com.kodeinc.fmclient;
 
 import android.app.Notification;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 
@@ -39,5 +40,8 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
                 .setContentText(Message)
                 .setSmallIcon(R.drawable.common_google_signin_btn_icon_dark)
                 .setContentIntent(pendingIntent);
+
+
+        NotificationManager notificationManager
     }
 }
