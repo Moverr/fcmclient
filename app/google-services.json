@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "585665347600",
+    "firebase_url": "https://parrot-kiosk.firebaseio.com",
+    "project_id": "parrot-kiosk",
+    "storage_bucket": "parrot-kiosk.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:585665347600:android:cc421aa06806bac48dca95",
+        "android_client_info": {
+          "package_name": "com.kodeinc.fmclient"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "585665347600-otoioo4ifsh7ts3uqofe4lgnmgpldqim.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCVii9kil4O2iqXBalLwMLwh5aozBZbKxY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "585665347600-otoioo4ifsh7ts3uqofe4lgnmgpldqim.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
