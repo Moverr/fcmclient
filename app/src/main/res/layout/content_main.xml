@@ -8,9 +8,12 @@
     tools:context=".MainActivity"
     tools:showIn="@layout/activity_main">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+
+
+    <EditText
+        android:id="@+id/token"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         android:text="Hello World!"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
