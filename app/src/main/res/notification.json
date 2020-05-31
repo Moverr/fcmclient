@@ -1,0 +1,10 @@
+
+{
+
+  "to":"\/topics\/publisher",
+  "notification":{
+    "body":"Testing out a publish message",
+    "title":"Testing out apublish message"
+  }
+
+}
