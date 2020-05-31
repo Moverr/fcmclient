@@ -36,7 +36,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        FirebaseMessaging.getInstance().subscribeToTopic("test");
+        //this is the game changer
+        FirebaseMessaging.getInstance().subscribeToTopic("publisher");
        String t =  FirebaseInstanceId.getInstance().getToken();
         Toast.makeText(this, t, Toast.LENGTH_LONG).show();
         Log.e("TOKEN",t);

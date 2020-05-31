@@ -24,7 +24,10 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
 
     @Override
     public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
-        showNotification(remoteMessage.getData().get("message"));
+        Toast.makeText(this.getApplicationContext(), "Dumba", Toast.LENGTH_LONG).show();
+
+      //  showNotification(remoteMessage.getData().get("message"));
+        showNotification(remoteMessage.getMessageId());
     }
 
     @Override
@@ -56,15 +59,15 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
 
 
         Notification noti = new Notification.Builder(this)
-                .setContentTitle("Notificaton")
+                .setContentTitle(Message)
                 .setContentText(Message)
                 .setSmallIcon(R.drawable.common_google_signin_btn_icon_dark)
                 .setContentIntent(pendingIntent)
                 .build();
 
-        NotificationCompat.Builder builder =  new NotificationCompat.Builder(this,null)
-                .setAutoCancel(true)
-                .setContentTitle("Testing Me MOver")
+        NotificationCompat.Builder builder =  new NotificationCompat.Builder(this,"cdsd")
+                .setAutoCancel(false)
+                .setContentTitle(Message)
                 .setContentText(Message)
                 .setSmallIcon(R.drawable.common_google_signin_btn_icon_dark)
                 .setContentIntent(pendingIntent);
