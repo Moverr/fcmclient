@@ -2,11 +2,15 @@ package com.kodeinc.fmclient;
 
 import android.os.Bundle;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 import com.google.firebase.messaging.FirebaseMessaging;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -36,16 +40,33 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+        FirebaseInstanceId.getInstance()
+                .getInstanceId()
+                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                        if(task.isSuccessful()){
+                            display(task.getResult().getToken());
+
+                        }
+                    }
+                });
+
+
         //this is the game changer
-        FirebaseMessaging.getInstance().subscribeToTopic("publisher");
-       String t =  FirebaseInstanceId.getInstance().getToken();
+
+
+
+
+    }
+
+    public void display(String t){
         Toast.makeText(this, t, Toast.LENGTH_LONG).show();
         Log.e("TOKEN",t);
         EditText ta = findViewById(R.id.token);
 
         ta.setText(t);
-
-
     }
 
     @Override
