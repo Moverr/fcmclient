@@ -3,9 +3,11 @@ package com.kodeinc.fmclient;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Looper;
 import android.text.TextUtils;
@@ -17,6 +19,8 @@ import androidx.core.app.NotificationCompat;
 
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.RemoteMessage;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 
 import java.io.IOException;
@@ -49,14 +53,32 @@ public class MyFirebaseMessagingService extends com.google.firebase.messaging.Fi
                 //key image
 
                 if(!TextUtils.isEmpty(url)){
-                    final string finalurl = url;
+                    final String finalurl = url;
 
                     //create thread to load image
                    new Handler(Looper.myLooper())
                            .post(new Runnable() {
                                @Override
                                public void run() {
+                                   Picasso.get()
+                                           .load(finalurl)
+                                           .into(new Target() {
+                                               @Override
+                                               public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                                                    showNotification(MyFirebaseMessagingService.this,
+                                                            title,body,null,bitmap );
+                                               }
 
+                                               @Override
+                                               public void onBitmapFailed(Exception e, Drawable errorDrawable) {
+
+                                               }
+
+                                               @Override
+                                               public void onPrepareLoad(Drawable placeHolderDrawable) {
+
+                                               }
+                                           });
                                }
                            });
                 }
@@ -75,6 +97,13 @@ public class MyFirebaseMessagingService extends com.google.firebase.messaging.Fi
 
     }
 
+
+    priate  showNotification(Context context,
+                             String title,String body,
+                             Intent pendingIntent,
+                             Bitmap bitmap){
+
+    }
     @Override
     public void onNewToken(@NonNull String s) {
 
