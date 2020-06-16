@@ -1,6 +1,7 @@
 package com.kodeinc.fmclient;
 
 import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -8,6 +9,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 import android.text.TextUtils;
@@ -110,6 +112,12 @@ public class MyFirebaseMessagingService extends com.google.firebase.messaging.Fi
 
         String channelId = "admtdev-911";
         String channelName = "EDMTDev";
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            NotificationChannel channel = new NotificationChannel(channelId,channelName,
+                    NotificationManager.IMPORTANCE_HIGH);
+
+            notificationManager.createNotificationChannel(channel);
+        }
 
     }
     @Override
