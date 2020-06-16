@@ -119,6 +119,15 @@ public class MyFirebaseMessagingService extends com.google.firebase.messaging.Fi
             notificationManager.createNotificationChannel(channel);
         }
 
+
+        NotificationCompat.Builder builder;
+
+        if(bitmap != null){
+            
+        }
+
+
+
     }
     @Override
     public void onNewToken(@NonNull String s) {
