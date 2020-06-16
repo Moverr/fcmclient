@@ -109,6 +109,8 @@ public class MyFirebaseMessagingService extends com.google.firebase.messaging.Fi
         int notificationId = new Random().nextInt();
 
         String channelId = "admtdev-911";
+        String channelName = "EDMTDev";
+
     }
     @Override
     public void onNewToken(@NonNull String s) {
