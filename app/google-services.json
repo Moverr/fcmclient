@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "585665347600-mtbqe00pl6qcequpa7il973pu1a4k75l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kodeinc.fmclient",
+            "certificate_hash": "1de0de09766e6bd64948fb0906f33895eb273688"
+          }
+        },
+        {
           "client_id": "585665347600-otoioo4ifsh7ts3uqofe4lgnmgpldqim.apps.googleusercontent.com",
           "client_type": 3
         }
