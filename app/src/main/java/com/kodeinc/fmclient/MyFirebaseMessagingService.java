@@ -4,6 +4,7 @@ import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -45,8 +46,8 @@ public class MyFirebaseMessagingService extends com.google.firebase.messaging.Fi
 
         if(remoteMessage.getNotification() != null){
 
-            String title = remoteMessage.getNotification().getTitle();
-            String body = remoteMessage.getNotification().getBody();
+            final String title = remoteMessage.getNotification().getTitle();
+            final String body = remoteMessage.getNotification().getBody();
 
             String url = "";
 
@@ -85,16 +86,65 @@ public class MyFirebaseMessagingService extends com.google.firebase.messaging.Fi
                                }
                            });
                 }
-            }
+            }else
+                showNotification(MyFirebaseMessagingService.this,
+                        title,body,null,null );
 
 
-            Toast.makeText(this.getApplicationContext(), "Dumba", Toast.LENGTH_LONG).show();
+        }else{
+            final String title = remoteMessage.getData().get("title");
+            final String body = remoteMessage.getData().get("body");
 
-            //  showNotification(remoteMessage.getData().get("message"));
-            showNotification(remoteMessage.getMessageId());
+            String url =   remoteMessage.getData().get("image");
+                //image url will be sent with data payload
+                //key image
+
+                if(!TextUtils.isEmpty(url)){
+                    final String finalurl = url;
+
+                    //create thread to load image
+                    new Handler(Looper.myLooper())
+                            .post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Picasso.get()
+                                            .load(finalurl)
+                                            .into(new Target() {
+                                                @Override
+                                                public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                                                    showNotification(MyFirebaseMessagingService.this,
+                                                            title,body,null,bitmap );
+                                                }
+
+                                                @Override
+                                                public void onBitmapFailed(Exception e, Drawable errorDrawable) {
+
+                                                }
+
+                                                @Override
+                                                public void onPrepareLoad(Drawable placeHolderDrawable) {
+
+                                                }
+                                            });
+                                }
+                            });
+                }else{
+                    showNotification(MyFirebaseMessagingService.this,
+                            title,body,null,null );
+                }
+
 
 
         }
+
+
+
+
+//        Toast.makeText(this.getApplicationContext(), "Dumba", Toast.LENGTH_LONG).show();
+//
+//        //  showNotification(remoteMessage.getData().get("message"));
+//        showNotification(remoteMessage.getMessageId());
+
 
 
 
@@ -123,10 +173,30 @@ public class MyFirebaseMessagingService extends com.google.firebase.messaging.Fi
         NotificationCompat.Builder builder;
 
         if(bitmap != null){
-            
+            builder = new NotificationCompat.Builder(context)
+                    .setSmallIcon(R.mipmap.ic_launcher_round)
+                    .setLargeIcon(bitmap)
+                    .setContentTitle(title)
+                    .setContentText(body);
+
+        }else{
+            builder = new NotificationCompat.Builder(context)
+                    .setSmallIcon(R.mipmap.ic_launcher_round)
+                    .setContentTitle(title)
+                    .setContentText(body);
         }
 
 
+
+        if(pendingIntent != null){
+            TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
+            stackBuilder.addNextIntent(pendingIntent);
+
+            PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0,PendingIntent.FLAG_UPDATE_CURRENT);
+            builder.setContentIntent(resultPendingIntent);
+        }
+
+        notificationManager.notify(notificationId,builder.build());
 
     }
     @Override
