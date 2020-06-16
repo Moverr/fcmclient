@@ -28,6 +28,7 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Map;
+import java.util.Random;
 
 public class MyFirebaseMessagingService extends com.google.firebase.messaging.FirebaseMessagingService {
 
@@ -98,11 +99,16 @@ public class MyFirebaseMessagingService extends com.google.firebase.messaging.Fi
     }
 
 
-    priate  showNotification(Context context,
+    private  void showNotification(Context context,
                              String title,String body,
                              Intent pendingIntent,
                              Bitmap bitmap){
 
+        NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+
+        int notificationId = new Random().nextInt();
+
+        String channelId = "admtdev-911";
     }
     @Override
     public void onNewToken(@NonNull String s) {
